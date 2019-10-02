@@ -39,6 +39,8 @@ public class RGBLed {
         SoftPwm.softPwmCreate(pinModel.getRedPin().getAddress(), 0, 50);
         SoftPwm.softPwmCreate(pinModel.getGreenPin().getAddress(), 0, 50);
         SoftPwm.softPwmCreate(pinModel.getBluePin().getAddress(), 0, 50);
+
+        this.showColor(Color.BLACK);
     }
 
     public void showColor(Color color){
