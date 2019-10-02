@@ -21,7 +21,7 @@ public class SimpleController {
     }
 
     @GetMapping("rgb/{color}")
-    String getColor(@PathVariable String color) {
+    String getColor(@PathVariable("color") String color) {
         led.showColor(Color.getColor(color));
 
         return "Set color to " + color;
