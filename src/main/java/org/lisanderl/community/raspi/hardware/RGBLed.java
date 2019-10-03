@@ -44,8 +44,8 @@ public class RGBLed {
 
     public void showColor(Color color) {
         SoftPwm.softPwmCreate(pinModel.getRedPin().getAddress(), 250, 50);
-        SoftPwm.softPwmCreate(pinModel.getGreenPin().getAddress(), 11, 50);
-        SoftPwm.softPwmCreate(pinModel.getBluePin().getAddress(), 11, 50);
+        SoftPwm.softPwmCreate(pinModel.getGreenPin().getAddress(), 250, 50);
+        SoftPwm.softPwmCreate(pinModel.getBluePin().getAddress(), 250, 50);
 //        var colorsArray = color.getRGBColorComponents(null);
 //        SoftPwm.softPwmWrite(pinModel.getRedPin().getAddress(), (int) (colorsArray[0] * 50.0f));
 //        SoftPwm.softPwmWrite(pinModel.getGreenPin().getAddress(), (int) (colorsArray[1] * 50.0f));
