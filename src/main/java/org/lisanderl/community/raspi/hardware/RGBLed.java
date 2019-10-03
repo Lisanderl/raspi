@@ -30,15 +30,15 @@ public class RGBLed {
     private void init() {
         var gpio = GpioFactory.getInstance();
 
-        var gpio1 = gpio.provisionDigitalOutputPin(pinModel.getRedPin());
-        gpio1.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
-        gpio1.low();
-        var gpio2 = gpio.provisionDigitalOutputPin(pinModel.getGreenPin());
-        gpio2.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
-        gpio2.low();
-        var gpio3 = gpio.provisionDigitalOutputPin(pinModel.getBluePin());
-        gpio3.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
-        gpio3.low();
+//        var gpio1 = gpio.provisionDigitalOutputPin(pinModel.getRedPin());
+//        gpio1.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
+//        gpio1.low();
+//        var gpio2 = gpio.provisionDigitalOutputPin(pinModel.getGreenPin());
+//        gpio2.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
+//        gpio2.low();
+//        var gpio3 = gpio.provisionDigitalOutputPin(pinModel.getBluePin());
+//        gpio3.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
+//        gpio3.low();
 
     }
 
