@@ -37,18 +37,16 @@ public class RGBLed {
         gpio.provisionDigitalOutputPin(pinModel.getBluePin())
                 .setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
 
-        SoftPwm.softPwmCreate(pinModel.getRedPin().getAddress(), 0, 50);
-        SoftPwm.softPwmCreate(pinModel.getGreenPin().getAddress(), 0, 50);
-        SoftPwm.softPwmCreate(pinModel.getBluePin().getAddress(), 0, 50);
-
-        this.showColor(Color.BLACK);
     }
 
     public void showColor(Color color) {
+        SoftPwm.softPwmCreate(pinModel.getRedPin().getAddress(), 0, 50);
+        SoftPwm.softPwmCreate(pinModel.getGreenPin().getAddress(), 0, 50);
+        SoftPwm.softPwmCreate(pinModel.getBluePin().getAddress(), 0, 50);
         var colorsArray = color.getRGBColorComponents(null);
         SoftPwm.softPwmWrite(pinModel.getRedPin().getAddress(), (int) (colorsArray[0] * 50.0f));
         SoftPwm.softPwmWrite(pinModel.getGreenPin().getAddress(), (int) (colorsArray[1] * 50.0f));
-        SoftPwm.softPwmWrite(pinModel.getBluePin().getAddress(), (int) (colorsArray[2] * 50.0f) + 100);
+        SoftPwm.softPwmWrite(pinModel.getBluePin().getAddress(), (int) (colorsArray[2] * 50.0f));
     }
 
 }
