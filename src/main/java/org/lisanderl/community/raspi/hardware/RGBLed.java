@@ -44,10 +44,10 @@ public class RGBLed {
     }
 
     public void showColor(Color color){
-    var colorsArray = color.getRGBColorComponents(new float[3]);
-    SoftPwm.softPwmWrite(pinModel.getRedPin().getAddress(), (int) (colorsArray[0] * 40.0f));
-    SoftPwm.softPwmWrite(pinModel.getGreenPin().getAddress(), (int) (colorsArray[1] * 40.0f));
-    SoftPwm.softPwmWrite(pinModel.getBluePin().getAddress(), (int) (colorsArray[2] * 40.0f));
+    var colorsArray = color.getComponents(new float[3]);
+    SoftPwm.softPwmWrite(pinModel.getRedPin().getAddress(), (int) (colorsArray[0] * 60.0f));
+    SoftPwm.softPwmWrite(pinModel.getGreenPin().getAddress(), (int) (colorsArray[1] * 60.0f));
+    SoftPwm.softPwmWrite(pinModel.getBluePin().getAddress(), (int) (colorsArray[2] * 60.0f));
     }
 
 }
