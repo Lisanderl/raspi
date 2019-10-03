@@ -30,26 +30,26 @@ public class RGBLed {
     private void init() {
         var gpio = GpioFactory.getInstance();
 
-        gpio.provisionDigitalOutputPin(pinModel.getRedPin())
-                .setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
-        gpio.provisionDigitalOutputPin(pinModel.getGreenPin())
-                .setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
-        gpio.provisionDigitalOutputPin(pinModel.getBluePin())
-                .setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
+        var gpio1 = gpio.provisionDigitalOutputPin(pinModel.getRedPin());
+        gpio1.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
+        gpio1.low();
+        var gpio2 = gpio.provisionDigitalOutputPin(pinModel.getGreenPin());
+        gpio2.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
+        gpio2.low();
+        var gpio3 = gpio.provisionDigitalOutputPin(pinModel.getBluePin());
+        gpio3.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
+        gpio3.low();
 
-        SoftPwm.softPwmStop(pinModel.getRedPin().getAddress());
-        SoftPwm.softPwmStop(pinModel.getGreenPin().getAddress());
-        SoftPwm.softPwmStop(pinModel.getBluePin().getAddress());
     }
 
     public void showColor(Color color) {
-        SoftPwm.softPwmCreate(pinModel.getRedPin().getAddress(), 0, 50);
+        SoftPwm.softPwmCreate(pinModel.getRedPin().getAddress(), 250, 50);
         SoftPwm.softPwmCreate(pinModel.getGreenPin().getAddress(), 0, 50);
         SoftPwm.softPwmCreate(pinModel.getBluePin().getAddress(), 0, 50);
-        var colorsArray = color.getRGBColorComponents(null);
-        SoftPwm.softPwmWrite(pinModel.getRedPin().getAddress(), (int) (colorsArray[0] * 50.0f) + 50);
-        SoftPwm.softPwmWrite(pinModel.getGreenPin().getAddress(), (int) (colorsArray[1] * 50.0f));
-        SoftPwm.softPwmWrite(pinModel.getBluePin().getAddress(), (int) (colorsArray[2] * 50.0f));
+//        var colorsArray = color.getRGBColorComponents(null);
+//        SoftPwm.softPwmWrite(pinModel.getRedPin().getAddress(), (int) (colorsArray[0] * 50.0f));
+//        SoftPwm.softPwmWrite(pinModel.getGreenPin().getAddress(), (int) (colorsArray[1] * 50.0f));
+//        SoftPwm.softPwmWrite(pinModel.getBluePin().getAddress(), (int) (colorsArray[2] * 50.0f));
     }
 
 }
