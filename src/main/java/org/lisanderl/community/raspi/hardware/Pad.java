@@ -24,9 +24,8 @@ public class Pad {
     private static final org.apache.logging.log4j.Logger loger = org.apache.logging.log4j.LogManager.getLogger(Pad.class);
     private static final int PROVIDER_ADR = 0x40;
     private static final int HORIZONTAL_MIN = 600;
-    private static final int HORIZONTAL_MAX = 2300;
-    private static final int VERTICAL_MIN = 800;
-    private static final int VERTICAL_MAX = 2300;
+    private static final int HORIZONTAL_MAX = 2400;
+    private static final int MULTIPLIER = 10;
     private static final int DEFAULT = 1500;
 
     private final PCA9685GpioProvider PCA9685;
@@ -62,12 +61,12 @@ public class Pad {
      * @return true of success
      */
     public boolean verticalMoveTo(int y){
-        //TODO calculate properly
-        y = 700 + y * 7;
 
-        if(y < VERTICAL_MIN || y > VERTICAL_MAX) {
+        y = HORIZONTAL_MIN + (y * MULTIPLIER) - 1;
+
+        if(y < HORIZONTAL_MIN || y > HORIZONTAL_MAX) {
             loger.error(MessageFormat.format("Vertical y should be in range from {0} to {1}",
-                    VERTICAL_MIN, VERTICAL_MAX));
+                    HORIZONTAL_MIN, HORIZONTAL_MAX));
             return false;
         }
         verticalDrive.setServoPulseWidth(y);
@@ -81,8 +80,8 @@ public class Pad {
      * @return true of success
      */
     public boolean horizontalMoveTo(int x){
-        //TODO calculate properly
-        x = 700 + x * 7;
+
+        x = HORIZONTAL_MIN + (x * MULTIPLIER) - 1;
 
         if(x < HORIZONTAL_MIN || x > HORIZONTAL_MAX) {
             loger.error(MessageFormat.format("Horizontal x should be in range from {0} to {1}",
