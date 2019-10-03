@@ -6,8 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
+;
 import java.awt.*;
+
 
 @RestController("/")
 public class SimpleController {
@@ -20,10 +21,20 @@ public class SimpleController {
         return "{value: 'Hello'}";
     }
 
-    @GetMapping("rgb/{color}")
-    String getColor(@PathVariable("color") String color) {
-        led.showColor(Color.getColor(color));
+    @GetMapping("rgb/blue")
+    void getBlueColor() {
+        led.showColor(Color.BLUE);
 
-        return "Set color to " + color;
+    }
+
+    @GetMapping("rgb/red")
+    void getRedColor() {
+        led.showColor(Color.RED);
+
+    }
+
+    @GetMapping("rgb/yellow")
+    void getYellowColor() {
+        led.showColor(Color.YELLOW);
     }
 }
