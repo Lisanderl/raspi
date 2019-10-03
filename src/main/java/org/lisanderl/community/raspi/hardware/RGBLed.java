@@ -3,6 +3,7 @@ package org.lisanderl.community.raspi.hardware;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
+import com.pi4j.wiringpi.Gpio;
 import com.pi4j.wiringpi.SoftPwm;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class RGBLed {
         this.init();
     }
 
-    private void init(){
+    private void init() {
         var gpio = GpioFactory.getInstance();
 
         gpio.provisionDigitalOutputPin(pinModel.getRedPin())
@@ -43,11 +44,11 @@ public class RGBLed {
         this.showColor(Color.BLACK);
     }
 
-    public void showColor(Color color){
-    var colorsArray = color.getRGBColorComponents(null);
-    SoftPwm.softPwmWrite(pinModel.getRedPin().getAddress(), (int) (colorsArray[1] * 50.0f));
-    SoftPwm.softPwmWrite(pinModel.getGreenPin().getAddress(), (int) (colorsArray[2] * 50.0f));
-    SoftPwm.softPwmWrite(pinModel.getBluePin().getAddress(), (int) (colorsArray[0] * 50.0f));
+    public void showColor(Color color) {
+        var colorsArray = color.getRGBColorComponents(null);
+        SoftPwm.softPwmWrite(pinModel.getRedPin().getAddress(), (int) (colorsArray[0] * 50.0f));
+        SoftPwm.softPwmWrite(pinModel.getGreenPin().getAddress(), (int) (colorsArray[1] * 50.0f));
+        SoftPwm.softPwmWrite(pinModel.getBluePin().getAddress(), (int) (colorsArray[2] * 50.0f) + 100);
     }
 
 }
