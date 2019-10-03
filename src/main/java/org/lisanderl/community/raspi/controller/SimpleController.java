@@ -25,19 +25,13 @@ public class SimpleController {
         return "{value: 'Hello'}";
     }
 
-    @GetMapping("rgb/blue")
+    @GetMapping("rgb/orange")
     void getBlueColor() {
         led.showColor(Color.BLUE);
 
     }
 
-    @GetMapping("rgb/red")
-    void getRedColor() {
-        led.showColor(Color.RED);
-
-    }
-
-    @GetMapping("rgb/yellow")
+    @GetMapping("rgb/blue")
     void getYellowColor() {
         led.showColor(Color.YELLOW);
     }
