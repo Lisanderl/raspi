@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class MQ135AirQualitySensor implements MQxAirQualitySensor {
     @Override
     public AirQuality getAirQuality() {
-        return null;
+        return AirQuality.OK;
     }
 }
