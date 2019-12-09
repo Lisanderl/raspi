@@ -19,7 +19,8 @@ public class SensorService {
 
     @Scheduled(fixedRateString = "${rasp.sensor.job.rate}")
     public void checkSensors() {
-        temperatureSensor.readSensorData(true);
+        log.info(
+                temperatureSensor.readSensorData(true));
         airQualitySensor.getAirQuality();
     }
 }
