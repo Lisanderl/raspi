@@ -18,7 +18,11 @@ nb-configuration.
 *.idea/sonarlint/
 */sonarlint/
 */sonarlint
-
+.gitignore
+mvnw
+mvnw*
+.mvn/
+.mvn/*
 ### Eclipse ###
 .classpath
 .project
