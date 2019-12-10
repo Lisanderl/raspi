@@ -3,6 +3,7 @@ package org.lisanderl.community.raspi.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.lisanderl.community.raspi.hardware.dht.DHTxSensor;
+import org.lisanderl.community.raspi.hardware.mq.MQ135AirQualitySensor;
 import org.lisanderl.community.raspi.hardware.mq.MQxAirQualitySensor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -21,6 +22,7 @@ public class SensorService {
     public void checkSensors() {
         log.info(
                 temperatureSensor.readSensorData(true));
-        airQualitySensor.readRawValue(2);
+        airQualitySensor.readRawValue(4);
+        log.info(((MQ135AirQualitySensor) airQualitySensor).getSensorData());
     }
 }
