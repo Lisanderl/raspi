@@ -4,6 +4,7 @@ import com.pi4j.gpio.extension.ads.ADS1115GpioProvider;
 import com.pi4j.gpio.extension.ads.ADS1115Pin;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinMode;
+import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CFactory;
 import com.pi4j.wiringpi.Gpio;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class MQ135AirQualitySensor implements MQxAirQualitySensor {
 
     public MQ135AirQualitySensor(@Value("${raspi.I2Cbus}") String I2Cbus) throws IOException, I2CFactory.UnsupportedBusNumberException {
 
-        this.analogGpioProvider = new ADS1115GpioProvider(Integer.parseInt(I2Cbus), ADS1115GpioProvider.ADS1115_ADDRESS_0x4B);
+        this.analogGpioProvider = new ADS1115GpioProvider(I2CFactory.getInstance(I2CBus.BUS_1), ADS1115GpioProvider.ADS1115_ADDRESS_0x4B);
         this.sensorPin = ADS1115Pin.INPUT_A0;
         analogGpioProvider.setMode(sensorPin, PinMode.ANALOG_INPUT);
     }
