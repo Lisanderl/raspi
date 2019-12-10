@@ -50,6 +50,7 @@ public class DHT11Sensor extends DHTxTemperatureSensor {
         if (checkData && (!isCorrectImpulsesData(sensorDataImpulses, sensorData) || !isCorrectData(sensorDataBinary))) {
             throw new IllegalArgumentException("Wrong sensor check sum");
         }
+
         lastSensorData = sensorData;
 
         return lastSensorData;
