@@ -21,6 +21,6 @@ public class SensorService {
     public void checkSensors() {
         log.info(
                 temperatureSensor.readSensorData(true));
-        airQualitySensor.getAirQuality();
+        airQualitySensor.readRawValue(2);
     }
 }
