@@ -12,6 +12,6 @@ public class SensorsData {
     @Override
     public String toString() {
         return "Temperature = " + temperature +
-                " \\n Humidity = " + humidity;
+                " \n Humidity = " + humidity;
     }
 }

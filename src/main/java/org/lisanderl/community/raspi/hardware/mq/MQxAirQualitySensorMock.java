@@ -6,8 +6,14 @@ import org.springframework.stereotype.Component;
 @Component
 @Profile("dev")
 public class MQxAirQualitySensorMock implements MQxAirQualitySensor {
+
     @Override
     public AirQuality getAirQuality() {
-        return null;
+        return AirQuality.GOOD;
+    }
+
+    @Override
+    public void readRawValue(int samples) {
+
     }
 }

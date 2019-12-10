@@ -1,6 +1,7 @@
 package org.lisanderl.community.raspi.hardware.mq;
 
-@FunctionalInterface
 public interface MQxAirQualitySensor {
+    void readRawValue(int samples);
+
     AirQuality getAirQuality();
 }
