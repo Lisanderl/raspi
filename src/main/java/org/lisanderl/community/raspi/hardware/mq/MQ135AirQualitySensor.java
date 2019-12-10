@@ -17,7 +17,7 @@ import javax.annotation.PreDestroy;
 import java.io.IOException;
 
 @Component
-@Profile("other")
+@Profile("dev")
 @PropertySource("classpath:application.properties")
 @Log4j2
 public class MQ135AirQualitySensor implements MQxAirQualitySensor {
@@ -28,8 +28,8 @@ public class MQ135AirQualitySensor implements MQxAirQualitySensor {
     private double sensorData;
 
     public MQ135AirQualitySensor(@Value("${raspi.I2Cbus}") String i2CbusAddr) throws IOException, I2CFactory.UnsupportedBusNumberException {
-        this.analogGpioProvider = new ADS1115GpioProvider(Integer.parseInt(i2CbusAddr), ADS1115GpioProvider.ADS1115_ADDRESS_0x49);
-        analogGpioProvider.setMonitorInterval(Integer.MAX_VALUE);
+        this.analogGpioProvider = new ADS1115GpioProvider(Integer.parseInt(i2CbusAddr), ADS1115GpioProvider.ADS1115_ADDRESS_0x48);
+        analogGpioProvider.setMonitorInterval(99999999);
         this.sensorPin = ADS1115Pin.INPUT_A0;
         analogGpioProvider.setMode(sensorPin, PinMode.ANALOG_INPUT);
         Gpio.delay(READ_DELAY);
