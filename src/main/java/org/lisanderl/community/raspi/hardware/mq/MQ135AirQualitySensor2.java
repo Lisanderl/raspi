@@ -24,8 +24,7 @@ public class MQ135AirQualitySensor2 implements MQxAirQualitySensor {
     private double sensorData;
 
     public MQ135AirQualitySensor2(@Value("${raspi.I2Cbus}") String i2CbusAddr) throws IOException, I2CFactory.UnsupportedBusNumberException {
-        //i2CDevice = I2CFactory.getInstance(Integer.parseInt(i2CbusAddr)).getDevice(ADS1115GpioProvider.ADS1115_ADDRESS_0x48);
-        i2CDevice = I2CFactory.getInstance(Integer.parseInt(i2CbusAddr)).getDevice(ADS1115GpioProvider.ADS1115_ADDRESS_0x4A);
+        i2CDevice = I2CFactory.getInstance(Integer.parseInt(i2CbusAddr)).getDevice(ADS1115GpioProvider.ADS1115_ADDRESS_0x48);
 
         log.info("MQ135AirQualitySensor has created");
 
