@@ -33,4 +33,9 @@ public enum AirQuality {
                 return UNKNOWN;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Air Quality is " + this.name();
+    }
 }

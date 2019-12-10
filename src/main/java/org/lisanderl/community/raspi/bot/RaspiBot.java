@@ -23,7 +23,7 @@ public class RaspiBot extends TelegramLongPollingBot {
     private static final String ACTION_TEMPERATURE = "/temperature";
     private static final String ACTION_AIR_QUALITY = "/air";
     private static final String ACTION_UNSUPPORTED = "Unsupported operation";
-    private static final String GREETINGS_MESSAGE = "Hi from " + BOT_USER_NAME + "\\n"
+    private static final String GREETINGS_MESSAGE = "Hi from " + BOT_USER_NAME + " \\n"
             + "You can use a few actions -> " + ACTION_TEMPERATURE + " or " + ACTION_AIR_QUALITY;
 
     private final DHTxSensor temperatureSensor;
