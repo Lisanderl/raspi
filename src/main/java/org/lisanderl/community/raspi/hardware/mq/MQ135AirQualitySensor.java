@@ -31,7 +31,6 @@ public class MQ135AirQualitySensor implements MQxAirQualitySensor {
         this.analogGpioProvider = new ADS1115GpioProvider(Integer.parseInt(i2CbusAddr), ADS1115GpioProvider.ADS1115_ADDRESS_0x48);
         analogGpioProvider.setMonitorInterval(99999999);
         this.sensorPin = ADS1115Pin.INPUT_A0;
-        analogGpioProvider.setMode(sensorPin, PinMode.ANALOG_INPUT);
         Gpio.delay(READ_DELAY);
         log.info("MQ135AirQualitySensor has created");
 
@@ -44,10 +43,11 @@ public class MQ135AirQualitySensor implements MQxAirQualitySensor {
     }
 
     @Override
-    public void readRawValue(int samples) {
+    public void readRawValue(int samples) throws IOException {
+        analogGpioProvider.setMode(sensorPin, PinMode.ANALOG_INPUT);
         double result = 0.0d;
         for (int i = 0; i < samples; i++) {
-            result += analogGpioProvider.getValue(sensorPin);
+            result += analogGpioProvider.getImmediateValue(sensorPin);
             Gpio.delay(READ_DELAY);
         }
         sensorData = result / samples;

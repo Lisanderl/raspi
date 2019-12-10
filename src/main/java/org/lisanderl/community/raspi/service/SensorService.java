@@ -10,6 +10,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 @Log4j2
 @PropertySource("classpath:application.properties")
@@ -22,7 +24,11 @@ public class SensorService {
     public void checkSensors() {
         log.info(
                 temperatureSensor.readSensorData(true));
-        airQualitySensor.readRawValue(4);
+        try {
+            airQualitySensor.readRawValue(4);
+        } catch (IOException e) {
+            log.info(e.getMessage());
+        }
         log.info(((MQ135AirQualitySensor) airQualitySensor).getSensorData());
     }
 }
