@@ -17,7 +17,7 @@ import javax.annotation.PreDestroy;
 import java.io.IOException;
 
 @Component
-@Profile("dev")
+@Profile("prod")
 @PropertySource("classpath:application.properties")
 @Log4j2
 public class MQ135AirQualitySensor implements MQxAirQualitySensor {
