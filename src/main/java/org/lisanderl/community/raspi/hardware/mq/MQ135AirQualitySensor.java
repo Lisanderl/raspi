@@ -1,7 +1,9 @@
 package org.lisanderl.community.raspi.hardware.mq;
 
 import com.pi4j.gpio.extension.ads.ADS1115GpioProvider;
+import com.pi4j.gpio.extension.ads.ADS1115Pin;
 import com.pi4j.io.gpio.Pin;
+import com.pi4j.io.gpio.PinMode;
 import com.pi4j.io.i2c.I2CFactory;
 import com.pi4j.wiringpi.Gpio;
 import lombok.Getter;
@@ -16,8 +18,8 @@ import java.io.IOException;
 
 @Component
 @Profile("prod")
-@Log4j2
 @PropertySource("classpath:application.properties")
+@Log4j2
 public class MQ135AirQualitySensor implements MQxAirQualitySensor {
     private static final int READ_DELAY = 20;
     private final ADS1115GpioProvider analogGpioProvider;
@@ -26,23 +28,11 @@ public class MQ135AirQualitySensor implements MQxAirQualitySensor {
     private double sensorData;
 
     public MQ135AirQualitySensor(@Value("${raspi.I2Cbus}") String I2Cbus) throws IOException, I2CFactory.UnsupportedBusNumberException {
-
-        log.info("Device is: " +
-                I2CFactory.getInstance(Integer.parseInt(I2Cbus)).getDevice(ADS1115GpioProvider.ADS1115_ADDRESS_0x4A));
-
-        log.info("Device is: " +
-                I2CFactory.getInstance(Integer.parseInt(I2Cbus)).getDevice(ADS1115GpioProvider.ADS1115_ADDRESS_0x4B));
-
-        log.info("Device is: " +
-                I2CFactory.getInstance(Integer.parseInt(I2Cbus)).getDevice(ADS1115GpioProvider.ADS1115_ADDRESS_0x48));
-
-        log.info("Device is: " +
-                I2CFactory.getInstance(Integer.parseInt(I2Cbus)).getDevice(ADS1115GpioProvider.ADS1115_ADDRESS_0x49));
-
-        throw new Error();
-//        this.analogGpioProvider = new ADS1115GpioProvider(Integer.parseInt(I2Cbus), ADS1115GpioProvider.ADS1115_ADDRESS_0x4B);
-//        this.sensorPin = ADS1115Pin.INPUT_A0;
-//        analogGpioProvider.setMode(sensorPin, PinMode.ANALOG_INPUT);
+        this.analogGpioProvider = new ADS1115GpioProvider(Integer.parseInt(I2Cbus), ADS1115GpioProvider.ADS1115_ADDRESS_0x49);
+        this.sensorPin = ADS1115Pin.INPUT_A0;
+        analogGpioProvider.setMode(sensorPin, PinMode.ANALOG_INPUT);
+        Gpio.delay(READ_DELAY);
+        log.info("MQ135AirQualitySensor has created");
     }
 
     @Override
