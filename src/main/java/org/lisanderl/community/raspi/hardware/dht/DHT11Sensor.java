@@ -17,7 +17,7 @@ import static java.util.Arrays.stream;
 @Profile("prod")
 @PropertySource("classpath:application.properties")
 public class DHT11Sensor extends DHTxTemperatureSensor {
-    private static final int WRONG_BITS_COUNT = 2;
+    private static final int WRONG_BITS_COUNT = 5;
 
     @Autowired
     public DHT11Sensor(@Value("${raspi.dht11}") String pinAdr) {
