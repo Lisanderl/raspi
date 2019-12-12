@@ -29,7 +29,7 @@ public class MQ135AirQualitySensor implements MQxAirQualitySensor {
 
     public MQ135AirQualitySensor(@Value("${raspi.I2Cbus}") String i2CbusAddr) throws IOException, I2CFactory.UnsupportedBusNumberException {
         this.analogGpioProvider = new ADS1115GpioProvider(Integer.parseInt(i2CbusAddr), ADS1115GpioProvider.ADS1115_ADDRESS_0x48);
-        analogGpioProvider.setMonitorInterval(99999999);
+        analogGpioProvider.setMonitorInterval(Integer.MAX_VALUE);
         this.sensorPin = ADS1115Pin.INPUT_A0;
         Gpio.delay(READ_DELAY);
         log.info("MQ135AirQualitySensor has created");
