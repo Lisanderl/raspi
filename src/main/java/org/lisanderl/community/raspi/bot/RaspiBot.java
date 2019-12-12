@@ -71,7 +71,7 @@ public class RaspiBot extends TelegramLongPollingBot {
                 sendMessage.setText(temperatureSensor.getLastCorrectMeasure().toString());
                 break;
             case ACTION_AIR_QUALITY:
-                var rawValue = " -> " + ((MQ135AirQualitySensor) airQualitySensor).getSensorData();
+                var rawValue = " : " + ((MQ135AirQualitySensor) airQualitySensor).getSensorData();
                 sendMessage.setText(airQualitySensor.getAirQuality().toString() + rawValue);
                 break;
             default:
