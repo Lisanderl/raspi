@@ -56,6 +56,11 @@ public class DHT11Sensor extends DHTxTemperatureSensor {
         return lastSensorData;
     }
 
+    @Override
+    public SensorsData getLastCorrectMeasure() {
+        return lastSensorData;
+    }
+
     private boolean isCorrectImpulsesData(int[] sensorImpulses, SensorsData sensorsData) {
 
         return (sensorImpulses[0] < MAX_LOW_HIGH_SENSOR_DELAY && sensorImpulses[1] < MAX_LOW_HIGH_SENSOR_DELAY)

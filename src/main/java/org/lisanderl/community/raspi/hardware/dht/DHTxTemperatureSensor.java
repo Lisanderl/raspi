@@ -15,8 +15,8 @@ import static java.util.Arrays.copyOfRange;
 
 public abstract class DHTxTemperatureSensor implements DHTxSensor {
     protected static final int MAX_LOW_HIGH_SENSOR_DELAY = 90;
-    protected SensorsData lastSensorData;
     private final GpioPinDigitalMultipurpose pin;
+    protected SensorsData lastSensorData;
     private int firstReadImpulseMillisecondsDelay = 100;
     private int secondReadImpulseMillisecondsDelay = 20;
     private int sensorReadStateInitDelay = 15;
@@ -44,6 +44,28 @@ public abstract class DHTxTemperatureSensor implements DHTxSensor {
         this.readOneBitMaxDelay = readOneBitMaxDelay;
     }
 
+    public static int convertBinaryArrToInt(int[] arr) {
+        int multyplier = 0;
+        int result = 0;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            result += (arr[i] << multyplier++);
+        }
+        return result;
+    }
+
+    public static boolean isCorrectData(int[] arr) {
+        if (Objects.isNull(arr) || arr.length < 40) {
+            return false;
+        }
+        int checkSum = convertBinaryArrToInt(copyOfRange(arr, 32, 40));
+        int integralRH = convertBinaryArrToInt(copyOfRange(arr, 0, 8));
+        int decimalRH = convertBinaryArrToInt(copyOfRange(arr, 8, 16));
+        int integralT = convertBinaryArrToInt(copyOfRange(arr, 16, 24));
+        int decimalT = convertBinaryArrToInt(copyOfRange(arr, 24, 32));
+
+        return checkSum == ((integralRH + decimalRH + integralT + decimalT) & 0xFF);
+    }
+
     public double getTemperature() {
 
         return lastSensorData.getTemperature();
@@ -54,19 +76,6 @@ public abstract class DHTxTemperatureSensor implements DHTxSensor {
         return lastSensorData.getHumidity();
     }
 
-    public SensorsData getLastCorrectMeasure() {
-
-        return lastSensorData;
-    }
-
-    public static int convertBinaryArrToInt(int[] arr) {
-        int multyplier = 0;
-        int result = 0;
-        for (int i = arr.length - 1; i >= 0; i--) {
-            result += (arr[i] << multyplier++);
-        }
-        return result;
-    }
 
     /**
      * @return array of 82 sensor impulses
@@ -104,19 +113,6 @@ public abstract class DHTxTemperatureSensor implements DHTxSensor {
         Gpio.delayMicroseconds(sensorReadStateInitDelay);
 
         return pin.isLow() || !pin.isHigh(); // just try to check signal one more time )
-    }
-
-    public static boolean isCorrectData(int[] arr) {
-        if (Objects.isNull(arr) || arr.length < 40) {
-            return false;
-        }
-        int checkSum = convertBinaryArrToInt(copyOfRange(arr, 32, 40));
-        int integralRH = convertBinaryArrToInt(copyOfRange(arr, 0, 8));
-        int decimalRH = convertBinaryArrToInt(copyOfRange(arr, 8, 16));
-        int integralT = convertBinaryArrToInt(copyOfRange(arr, 16, 24));
-        int decimalT = convertBinaryArrToInt(copyOfRange(arr, 24, 32));
-
-        return checkSum == ((integralRH + decimalRH + integralT + decimalT) & 0xFF);
     }
 
     private int captureSignal(PinState state, int attempt) {

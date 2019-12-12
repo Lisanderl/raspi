@@ -22,12 +22,16 @@ public class SensorService {
 
     @Scheduled(fixedRateString = "${rasp.sensor.job.rate}")
     public void checkSensors() {
-        log.info(
-                temperatureSensor.readSensorData(true));
+        try {
+            log.info(
+                    temperatureSensor.readSensorData(true));
+        } catch (RuntimeException ex) {
+            log.error(ex.getMessage());
+        }
         try {
             airQualitySensor.readRawValue(4);
-        } catch (IOException e) {
-            log.info(e.getMessage());
+        } catch (IOException ex) {
+            log.error(ex.getMessage());
         }
         log.info(((MQ135AirQualitySensor) airQualitySensor).getSensorData());
     }
