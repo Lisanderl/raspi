@@ -14,6 +14,7 @@ public enum AirQuality {
     FAIRLY_BAD(4000),
     UNKNOWN(0);
 
+    private static String message = "Air Quality is ";
     private int analogValue;
 
     AirQuality(int analogValue) {
@@ -30,6 +31,7 @@ public enum AirQuality {
 
     @Override
     public String toString() {
-        return "Air Quality is " + this.name();
+
+        return message + this.name();
     }
 }
