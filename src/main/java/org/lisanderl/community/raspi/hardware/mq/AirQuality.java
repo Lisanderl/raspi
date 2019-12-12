@@ -2,13 +2,16 @@ package org.lisanderl.community.raspi.hardware.mq;
 
 import lombok.Getter;
 
+import static java.util.Arrays.stream;
+
 @Getter
 public enum AirQuality {
-    GOOD(100),
-    OK(200),
-    NORMAL(300),
-    BAD(400),
-    FAIRLY_BAD(500),
+    PERFECT(900),
+    GOOD(1500),
+    OK(2000),
+    NORMAL(2500),
+    BAD(3000),
+    FAIRLY_BAD(4000),
     UNKNOWN(0);
 
     private int analogValue;
@@ -18,20 +21,11 @@ public enum AirQuality {
     }
 
     public static AirQuality getAirQualityByAnalogValue(int analogValue) {
-        switch (analogValue) {
-            case 100:
-                return GOOD;
-            case 200:
-                return OK;
-            case 300:
-                return NORMAL;
-            case 400:
-                return BAD;
-            case 500:
-                return FAIRLY_BAD;
-            default:
-                return UNKNOWN;
-        }
+
+        return stream(AirQuality.values()).reduce((v1, v2) ->
+                v1.getAnalogValue() >= analogValue
+                        ? v1 : v2
+        ).orElse(UNKNOWN);
     }
 
     @Override
