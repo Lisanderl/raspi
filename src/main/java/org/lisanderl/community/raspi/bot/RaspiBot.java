@@ -3,6 +3,7 @@ package org.lisanderl.community.raspi.bot;
 import lombok.extern.log4j.Log4j2;
 import lombok.var;
 import org.lisanderl.community.raspi.hardware.dht.DHTxSensor;
+import org.lisanderl.community.raspi.hardware.mq.MQ135AirQualitySensor;
 import org.lisanderl.community.raspi.hardware.mq.MQxAirQualitySensor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -70,7 +71,8 @@ public class RaspiBot extends TelegramLongPollingBot {
                 sendMessage.setText(temperatureSensor.getLastCorrectMeasure().toString());
                 break;
             case ACTION_AIR_QUALITY:
-                sendMessage.setText(airQualitySensor.getAirQuality().toString());
+                var rawValue = " -> " + ((MQ135AirQualitySensor) airQualitySensor).getSensorData();
+                sendMessage.setText(airQualitySensor.getAirQuality().toString() + rawValue);
                 break;
             default:
                 sendMessage.setText(ACTION_UNSUPPORTED);
